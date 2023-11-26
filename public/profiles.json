@@ -1,0 +1,14 @@
+{
+    "1": {
+        "profilePicUrl": "https://picsum.photos/id/331/250/350",
+        "firstname": "Matthew",
+        "lastname": "Neff",
+        "streetAddress": "123 N 321 E",
+        "city": "Orem",
+        "state": "UT",
+        "zip": "84608",
+        "email": "matthew.tneff@gmail.com",
+        "phone": "(321) 317-2716",
+        "favColor": "blue"
+    }
+}
