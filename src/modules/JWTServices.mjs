@@ -54,12 +54,10 @@ export default class JWTServices {
         TFqMo4Wijc+4e3N9PP+wuT/xCt0GcWwUI/nQbbNgi5gQGJopCHq3WM0fyT8OOMte
         6yswzA32jGCnpyqXK6zwEYAi/6BWpZ62G1RbLTgpERpvCrw+ACNOc8u+5g==
         -----END PRIVATE KEY-----`;
-
-        this.creatJWT();
     }
 
     async creatJWT() {
-        this.privateKey = await jose.importPKCS8(pkcs8, alg)
+        this.privateKey = await jose.importPKCS8(this.pkcs8, this.alg)
 
         this.token = await new jose.SignJWT({ myClaim: true })
           .setProtectedHeader({
