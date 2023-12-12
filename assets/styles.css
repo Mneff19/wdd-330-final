@@ -14,6 +14,28 @@ html {
     padding: 64px;
 }
 
+@keyframes placeHolderShimmer{
+    0%{
+        background-position: -1468px 0
+    }
+    100%{
+        background-position: 1468px 0
+    }
+}
+
+.animated-background {
+    animation-duration: 1.25s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #F6F6F6;
+    background: linear-gradient(to right, #e4e4e4 8%, #F0F0F0 18%, #e4e4e4 33%);
+    background-size: 2000px 104px;
+    position: relative;
+    color: transparent;
+}
+
 h1,
 h2,
 p {
@@ -33,7 +55,8 @@ p {
     font-size: 18px;
     line-height: 1.15;
     text-align: center;
-    padding: 0 0 64px;
+    padding: 0;
+    margin: 0 0 64px;
 }
 
 /*
@@ -73,6 +96,29 @@ p {
 /*
 * Profile Page
 */
+.s-profile .default {
+    text-align: center;
+    font-size: 24px;
+    line-height: 2;
+}
+
+.s-profile .default a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.s-profile .logged-in {
+    display: none;
+}
+
+.s-profile.authenticated .default {
+    display: none;
+}
+
+.s-profile.authenticated .logged-in {
+    display: block;
+}
+
 .s-profile .info-section {
     display: flex;
     justify-content: space-between;

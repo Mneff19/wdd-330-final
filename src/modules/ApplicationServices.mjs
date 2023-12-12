@@ -1,5 +1,15 @@
 export default class ApplicationServices {
-    constructor() {
-        alert("Hello from applicationServices!")
+    getLocalItem(key) {
+        return localStorage.getItem(key);
+    }
+    
+    setLocalItem(key, data) {
+        localStorage.setItem(key, data);
+    }
+    
+    deleteLocalStorage(key){
+        if(localStorage.getItem(key)) {
+            localStorage.removeItem(key);
+        }
     }
 }

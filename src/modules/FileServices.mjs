@@ -1,7 +1,4 @@
 export default class FileServices {
-    constructor() {
-    }
-
     async getFileJSON(filename) {
         try {
             const response = await fetch(`../public/${filename}.json`);
