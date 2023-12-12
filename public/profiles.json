@@ -10,5 +10,17 @@
         "email": "matthew.tneff@gmail.com",
         "phone": "(321) 317-2716",
         "favColor": "blue"
+    },
+    "2": {
+        "profilePicUrl": "https://picsum.photos/id/391/250/350",
+        "firstname": "Seth",
+        "lastname": "Elliot",
+        "streetAddress": "321 S 123 W",
+        "city": "Sandy",
+        "state": "UT",
+        "zip": "84703",
+        "email": "seth.elliot@test.com",
+        "phone": "(123) 713-6172",
+        "favColor": "red"
     }
 }

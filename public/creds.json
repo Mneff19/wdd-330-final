@@ -1,7 +1,10 @@
-[
-    {
-        "username": "mn",
+{
+    "mn": {
         "password": "123mn!",
         "id": 1
+    },
+    "se": {
+        "password": "123se!",
+        "id": 2
     }
-]
+}
