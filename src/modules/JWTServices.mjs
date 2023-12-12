@@ -3,33 +3,25 @@ import * as jose from 'jose';
 // const { subtle } = globalThis.crypto;
 
 export default class JWTServices {
-    constructor() {
-        this.token,
-        this.publicJwk;
+  async createJWT() {
+    const { publicKey, privateKey } = await jose.generateKeyPair('RS256');
 
-        this.createJWT();
-    }
+    const publicJwk = await jose.exportJWK(publicKey);
+    const token = await new jose.SignJWT({ myClaim: true })
+      .setProtectedHeader({
+        typ: 'JWT',
+        alg: 'RS256',
+      })
+      .setExpirationTime('6h')
+      .setIssuedAt()
+      .sign(privateKey);
 
-    async createJWT() {
-      const { publicKey, privateKey } = await jose.generateKeyPair('RS256');
-    
-      this.publicJwk = await jose.exportJWK(publicKey);
-      this.token = await new jose.SignJWT({ myClaim: true })
-        .setProtectedHeader({
-          typ: 'JWT',
-          alg: 'RS256',
-        })
-        .setExpirationTime('6h')
-        .setIssuedAt()
-        .sign(privateKey);
+    return [token, publicJwk];
+  }
 
-
-        this.verifyJWT();
-    }
-
-    async verifyJWT() {
-        const parsedJwk = await jose.importJWK(this.publicJwk, 'RS256');
-        const { payload } = await jose.jwtVerify(this.token, parsedJwk);
-        return payload;
-    }
+  async verifyJWT(jwtArr) {
+    const parsedJwk = await jose.importJWK(jwtArr[1], 'RS256');
+    const { payload } = await jose.jwtVerify(jwtArr[0], parsedJwk);
+    return payload;
+  }
 }
