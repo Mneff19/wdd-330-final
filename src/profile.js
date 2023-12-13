@@ -1,25 +1,25 @@
-import FileServices from "./modules/FileServices.mjs";
-import APIServices from "./modules/APIServices.mjs";
 import ApplicationServices from "./modules/ApplicationServices.mjs";
+import JWTServices from "./modules/JWTServices.mjs";
 
-const fileService = new FileServices();
-const weatherAPI = new APIServices('https://api.openweathermap.org/data/2.5/forecast?lat=40.53183096915482&lon=-112.30080357417363&appid=84fd1805bbdfc8774858391be52c31e4&units=imperial');
 const appServices = new ApplicationServices();
+const jwtService = new JWTServices();
 
 const jwt = appServices.getLocalItem('jwt');
-const jwtValid = false;
-if (jwt && jwtValid) {
-    document.querySelector(".s-profile").classList.add('authenticated');
-    await populateProfileInfo();
-    document.querySelectorAll(".animated-background").forEach((animatedEl) => {
-        animatedEl.classList.remove('animated-background');
-    });
+if (jwt) {
+    try {
+        const jwtPayload = await jwtService.verifyJWT(jwt);
+        document.querySelector(".s-profile").classList.add('authenticated');
+        populateProfileInfo(jwtPayload);
+    } catch (e) {
+        appServices.deleteLocalStorage('jwt');
+        alert("Session has timed out, please log in again!");
+    }
 }
 
-async function populateProfileInfo () {
-    const userID = appServices.getLocalItem('id');
-    const profileInfo = await fileService.getFileJSON("profiles");
-    const weatherList = await weatherAPI.apiFetch();
+function populateProfileInfo (info) {
+    const userID = info['id'];
+    const profileInfo = info['profileInfo'];
+    const weatherList = info['weatherList'];
 
     // Populate the profile info on the page
     for (const [profileProp, propVal] of Object.entries(profileInfo[userID])) {
