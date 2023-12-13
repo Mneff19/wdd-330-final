@@ -26,7 +26,7 @@ document.forms['loginForm'].addEventListener('submit', async function(e)  {
 
             const jwt = await jwtServices.createJWT(jwtProps);
             appServices.setLocalItem('jwt', jwt);
-            window.location = '/profile/index.html';
+            window.location = 'https://mneff19.github.io/wdd-330-final/profile/index.html';
         } else {
             alert("Incorrect password, please try again.")
         }
